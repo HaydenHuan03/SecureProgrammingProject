@@ -26,3 +26,8 @@ postgres_data/
 .idea/
 .vscode/
 *.swp
+
+# Project meta
+CLAUDE.md
+docs/
+.claude/
