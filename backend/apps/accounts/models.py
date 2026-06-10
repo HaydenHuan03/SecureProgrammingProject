@@ -81,7 +81,6 @@ class OTPToken(models.Model):
         code = f"{secrets.randbelow(1_000_000):06d}"
         code_hash = hashlib.sha256(code.encode()).hexdigest()
         expires_at = timezone.now() + timedelta(minutes=5)
-        # Invalidate existing unused tokens for this user+purpose
         cls.objects.filter(user=user, purpose=purpose, is_used=False).update(is_used=True)
         token = cls.objects.create(
             user=user,
