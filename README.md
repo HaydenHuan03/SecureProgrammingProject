@@ -22,12 +22,12 @@ A secure e-commerce web application demonstrating authentication, session manage
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     Docker Compose                       │
+│                     Docker Compose                      │
 │                                                         │
-│  ┌──────────────────────┐  ┌──────────────┐ ┌────────┐ │
+│  ┌──────────────────────┐  ┌──────────────┐ ┌────────┐  │
 │  │  React/TS SPA        │─▶│  Django DRF  │─▶Postgres│ │
-│  │  + TanStack Query    │  │  (port 8000) │ │        │ │
-│  │  (port 3000)         │  └──────┬───────┘ └────────┘ │
+│  │  + TanStack Query    │  │  (port 8000) │ │        │  │
+│  │  (port 3000)         │  └──────┬───────┘ └────────┘  │
 │  └──────────────────────┘         │                     │
 │                            ┌──────▼───────┐             │
 │                            │   Mailhog    │             │
