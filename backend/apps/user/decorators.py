@@ -6,10 +6,7 @@ from .jwt_utils import decode_token
 
 
 def _get_token(request) -> str | None:
-    auth_header = request.headers.get("Authorization", "")
-    if auth_header.startswith("Bearer "):
-        return auth_header[len("Bearer "):]
-    return None
+    return request.COOKIES.get("jwt")
 
 
 def jwt_required(view_func):
@@ -19,11 +16,14 @@ def jwt_required(view_func):
         if not token:
             return JsonResponse({"error": "authentication required"}, status=401)
         try:
-            request.token_payload = decode_token(token)
+            payload = decode_token(token)
         except jwt.ExpiredSignatureError:
             return JsonResponse({"error": "token expired"}, status=401)
         except jwt.InvalidTokenError:
             return JsonResponse({"error": "invalid token"}, status=401)
+        if payload.get("purpose") == "mfa":
+            return JsonResponse({"error": "invalid token"}, status=401)
+        request.token_payload = payload
         return view_func(request, *args, **kwargs)
     return wrapper
 

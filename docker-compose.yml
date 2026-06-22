@@ -35,7 +35,7 @@ services:
       - EMAIL_PORT=1025
       - ALLOWED_HOSTS=localhost,127.0.0.1,backend
       - CORS_ALLOWED_ORIGINS=http://localhost:3000
-      - DJANGO_SUPERUSER_EMAIL=admin@secureapp.local
+      - DJANGO_SUPERUSER_EMAIL=teomeehua@gmail.com
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_PASSWORD=Admin1234!
     volumes:
@@ -51,7 +51,7 @@ services:
   frontend:
     build: ./frontend
     environment:
-      - VITE_API_URL=http://localhost:8000
+      - VITE_API_URL=
     volumes:
       - ./frontend:/app
       - /app/node_modules

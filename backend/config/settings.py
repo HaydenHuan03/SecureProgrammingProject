@@ -19,9 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "apps.accounts",
-    "apps.products",
-    "apps.orders",
+    "apps.user",
 ]
 
 MIDDLEWARE = [
@@ -78,8 +76,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
-
-AUTH_USER_MODEL = "accounts.User"
 
 # Session security
 SESSION_ENGINE = "django.contrib.sessions.backends.db"

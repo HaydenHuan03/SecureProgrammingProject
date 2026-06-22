@@ -6,6 +6,7 @@ from .models import User
 class UserResponse:
     user_id: str
     username: str
+    email: str
     role: str
 
     @staticmethod
@@ -13,6 +14,7 @@ class UserResponse:
         return UserResponse(
             user_id=str(user.user_id),
             username=user.username,
+            email=user.email,
             role=user.role,
         )
 
@@ -20,5 +22,6 @@ class UserResponse:
         return {
             "user_id": self.user_id,
             "username": self.username,
+            "email": self.email,
             "role": self.role,
         }
