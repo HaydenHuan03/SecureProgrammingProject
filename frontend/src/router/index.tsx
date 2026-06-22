@@ -2,13 +2,15 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LoginPage } from "../features/auth/LoginPage";
 import { AdminPanel } from "../features/users/AdminPanel";
 import { ProfilePage } from "../features/users/ProfilePage";
+import { ProductsPage } from "../features/products/ProductsPage";
+import { OrdersPage } from "../features/orders/OrdersPage";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { useAuth } from "../features/auth/AuthContext";
 
 function RootRedirect() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
-  return <Navigate to={user.role === "admin" ? "/admin" : "/profile"} replace />;
+  return <Navigate to={user.role === "admin" ? "/admin" : "/products"} replace />;
 }
 
 export const router = createBrowserRouter([
@@ -26,6 +28,22 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <ProfilePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/products",
+    element: (
+      <ProtectedRoute>
+        <ProductsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/orders",
+    element: (
+      <ProtectedRoute>
+        <OrdersPage />
       </ProtectedRoute>
     ),
   },

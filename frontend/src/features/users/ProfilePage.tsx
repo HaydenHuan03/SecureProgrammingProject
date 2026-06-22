@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useUser } from "./hooks/useUser";
 import { useLogout } from "../auth/hooks/useLogout";
@@ -18,9 +18,13 @@ export function ProfilePage() {
       <div style={styles.card}>
         <div style={styles.header}>
           <h2 style={styles.title}>My Profile</h2>
-          <button style={styles.logoutBtn} onClick={handleLogout} disabled={isPending}>
-            {isPending ? "Logging out…" : "Logout"}
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <Link to="/products" style={styles.navLink}>Products</Link>
+            <Link to="/orders" style={styles.navLink}>Orders</Link>
+            <button style={styles.logoutBtn} onClick={handleLogout} disabled={isPending}>
+              {isPending ? "Logging out…" : "Logout"}
+            </button>
+          </div>
         </div>
         {isLoading && <p>Loading…</p>}
         {error && <p style={styles.error}>{error.message}</p>}
@@ -47,6 +51,7 @@ const styles: Record<string, React.CSSProperties> = {
   header: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" },
   title: { margin: 0, fontSize: "1.25rem" },
   logoutBtn: { padding: "0.375rem 0.75rem", background: "#dc2626", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer", fontSize: "0.875rem" },
+  navLink: { fontSize: "0.875rem", color: "#2563eb", textDecoration: "none" },
   dl: { display: "grid", gridTemplateColumns: "120px 1fr", rowGap: "0.75rem", columnGap: "1rem", margin: 0 },
   dt: { fontWeight: 600, fontSize: "0.875rem", color: "#6b7280" },
   dd: { margin: 0, fontSize: "0.875rem", wordBreak: "break-all" },
