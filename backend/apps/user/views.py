@@ -1,5 +1,6 @@
 import json
 import jwt as pyjwt
+from django.conf import settings
 from django.http import JsonResponse
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -42,8 +43,30 @@ def _set_jwt_cookie(response, token: str) -> None:
         httponly=True,
         samesite="Lax",
         path="/",
-        secure=False,  # set True in production (HTTPS only)
+        secure=not settings.DEBUG,
     )
+
+
+class RegisterView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def post(self, request):
+        try:
+            data = _parse_json(request)
+            username = validate_username(data.get("username", ""))
+            email = validate_email(data.get("email", ""))
+            password = validate_password(data.get("password", ""))
+        except ValueError as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+        try:
+            user = services.create_user(username, email, password, Role.USER)
+        except Exception:
+            return JsonResponse({"error": "username or email already exists"}, status=409)
+
+        return JsonResponse(UserResponse.from_model(user).to_dict(), status=201)
 
 
 # Step 1 — validate credentials, return mfa_token (no OTP sent yet)

@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useLogin } from "./hooks/useLogin";
 import { useSendOTP } from "./hooks/useSendOTP";
 import { useMFAVerify } from "./hooks/useMFAVerify";
@@ -103,6 +103,13 @@ export function LoginPage() {
           </form>
         )}
 
+        {step === "credentials" && (
+          <p style={styles.footer}>
+            No account?{" "}
+            <Link to="/register" style={styles.link}>Register</Link>
+          </p>
+        )}
+
         {step === "otp" && (
           <form onSubmit={handleVerify} style={styles.form}>
             <p style={styles.hint}>A 6-digit code was sent to <strong>{email}</strong>.</p>
@@ -145,4 +152,6 @@ const styles: Record<string, React.CSSProperties> = {
   button: { padding: "0.625rem", background: "#2563eb", color: "#fff", border: "none", borderRadius: "4px", fontSize: "1rem", cursor: "pointer" },
   linkBtn: { background: "none", border: "none", color: "#2563eb", fontSize: "0.875rem", cursor: "pointer", textAlign: "center" },
   error: { color: "#dc2626", fontSize: "0.875rem", margin: 0 },
+  footer: { textAlign: "center", fontSize: "0.875rem", marginTop: "0.5rem", color: "#6b7280" },
+  link: { color: "#2563eb", textDecoration: "none" },
 };

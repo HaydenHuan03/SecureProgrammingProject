@@ -31,7 +31,6 @@ class OrderItem(models.Model):
         "product.Product", on_delete=models.PROTECT, related_name="order_items"
     )
     quantity = models.PositiveIntegerField()
-    # Price snapshotted at order creation — never sourced from the request body
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:

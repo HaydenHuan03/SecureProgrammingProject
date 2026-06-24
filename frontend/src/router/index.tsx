@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { LoginPage } from "../features/auth/LoginPage";
+import { RegisterPage } from "../features/auth/RegisterPage";
 import { AdminPanel } from "../features/users/AdminPanel";
 import { ProfilePage } from "../features/users/ProfilePage";
 import { ProductsPage } from "../features/products/ProductsPage";
@@ -15,6 +16,7 @@ function RootRedirect() {
 
 export const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
   {
     path: "/admin",
     element: (

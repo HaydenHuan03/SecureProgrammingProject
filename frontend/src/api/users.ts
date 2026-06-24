@@ -14,6 +14,12 @@ export interface LoginResponse {
   mfa_token: string;
 }
 
+export const register = (username: string, email: string, password: string) =>
+  apiRequest<User>("/api/users/register/", {
+    method: "POST",
+    body: JSON.stringify({ username, email, password }),
+  });
+
 export const login = (username: string, password: string) =>
   apiRequest<LoginResponse>("/api/users/login/", {
     method: "POST",

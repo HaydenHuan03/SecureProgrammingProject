@@ -83,13 +83,14 @@ AUTH_PASSWORD_VALIDATORS = [
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "Lax"       # Lax in dev (cross-port); Strict in prod
-SESSION_COOKIE_SECURE = False          # False for local HTTP; True in prod
+SESSION_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_AGE = 1800              # 30 min inactivity timeout
 SESSION_SAVE_EVERY_REQUEST = True      # Slide expiry window on each request
 
 # CSRF
 CSRF_COOKIE_HTTPONLY = False           # Frontend needs to read it to send X-CSRFToken
 CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SECURE = not DEBUG
 CSRF_TRUSTED_ORIGINS = os.environ.get(
     "CORS_ALLOWED_ORIGINS", "http://localhost:3000"
 ).split(",")
